@@ -5,16 +5,16 @@ const express = require("express");
  const{
     getAllAccessorize,
     getAccessorizeById, 
-    // createAccessorize,
-    // updateAccessorize,
-    // deleteAccessorize,
+     createAccessorize,
+     updateAccessorize,
+     deleteAccessorize,
 
  } = require("../controllers/commerceControllers");
 
  router.get("/", getAllAccessorize,);
   router.get("/:id", getAccessorizeById);
-//  router.post("/", createAccessorize);
-//  router.put("/:id", updateAccessorize)
-//  router.delete("/:id", deleteAccessorize);
+  router.post("/", createAccessorize);
+  router.put("/:id", updateAccessorize)
+  router.delete("/:id", deleteAccessorize);
 
  module.exports = router;
