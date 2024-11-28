@@ -3,7 +3,7 @@ const express = require("express");
 const connectdb = require("./Db/db");
 
 const commerceRoutes = require("./routes/commerceRoutes");
-const Accessorize = require("./models/commerce");
+const Electronics = require("./models/commerce");
 
 const userRoutes = require("./routes/userRoutes");
 
@@ -12,43 +12,122 @@ const app = express();
 app.use(express.json());
 
 connectdb();
-app.use("/api/accessorize", commerceRoutes);
-app.use("/api/user", userRoutes )
+app.use("/api/electronic", commerceRoutes);
+app.use("/api/user", userRoutes );
 
-// async function createCommerce() {
+
+// async function createElectronic() {
 //   try {
-//     await Accessorize.deleteMany({});
-//     await Accessorize.create([
+//     await Electronics.create([
 //       {
-//         accessory_type: "Bags",
-//         price: 100,
-//         colors: ["black", "gray", "brown"],
-//         brand: "Da Milano",
-//         isPublished: true,
+//         name:"Phone",
+//         price:639,
+//         Brand:"Sumsung Galaxy A15"
 //       },
-
 //       {
-//         accessory_type: "Watch",
-//         price: 150,
-//         colors: ["white", "silver", "black"],
-//         brand: "Rolex",
-//         isPublished: true,
+//         name:"Phone",
+//         price: 1159,
+//         Brand:"Sumsung Galaxy A25"
 //       },
-
 //       {
-//         accessory_type: "jewellery",
-//         price: 200,
-//         colors: ["silver", "gold", "rose gold"],
-//         brand: "Hermés",
-//         isPublished: true,
+//         name:"Phone",
+//         price:5699,
+//         Brand:"Sumsung Galaxy S24 Ultra"
 //       },
-//     ]);
-//     console.log("Success");
+//       {
+//         name:"Phone",
+//         price:4499 ,
+//         Brand:"Sumsung Galaxy S24 Plus"
+//       },
+//       {
+//         name:"Phone",
+//         price: 7399 ,
+//         Brand:"iPhone 16 Pro"
+//       },
+//       {
+//         name:"Phone",
+//         price: 7300 ,
+//         Brand:"iPhone 16"
+//       },
+//       {
+//         name:"Phone",
+//         price: 5200 ,
+//         Brand:"iPhone 15"
+//       },
+//       {
+//         name:"Phone",
+//         price: 3600 ,
+//         Brand:"iPhone 14"
+//       },
+//       {
+//         name:"TV",
+//         price:575,
+//         Brand:"Toshiba"
+//       },
+//       {
+//         name:"TV",
+//         price:659,
+//         Brand:"biolux"
+//       },
+//       {
+//         name:"TV",
+//         price: 679 ,
+//         Brand:"TCL"
+//       },
+//       {
+//         name:"TV",
+//         price: 799,
+//         Brand:"Sumsung"
+//       },
+//       {
+//         name:"Airpods",
+//         price: 399 ,
+//         Brand:"JBL"
+//       },
+//       {
+//         name:"Airpods",
+//         price: 500 ,
+//         Brand:"Apple"
+//       },
+//       {
+//         name:"Airpods",
+//         price: 319 ,
+//         Brand:"JBL"
+//       },
+//       {
+//         name:"Airpods",
+//         price:265 ,
+//         Brand:"Sumsung"
+//       },
+//       {
+//         name:"Smart watch",
+//         price: 2999 ,
+//         Brand:"Apple"
+//       },
+//       {
+//         name:"Smart watch",
+//         price:2899 ,
+//         Brand:"Apple"
+//       },
+//       {
+//         name:"Smart watch",
+//         price:2965 ,
+//         Brand:"Apple"
+//       },
+//       {
+//         name:"Smart watch",
+//         price:2555 ,
+//         Brand:"Apple"
+//       }
+//     ])
+//     console.log("success")
+    
 //   } catch (error) {
-//     console.log(error.message);
+//     console.error(error.message)
 //   }
+  
 // }
-// createCommerce();
+// createElectronic()
 
 
 

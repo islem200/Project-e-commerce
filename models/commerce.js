@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
 
 const commerceSchema = new mongoose.Schema({
-    accessory_type: String,
+    name: String,
     price: Number,
-    colors:[String],
-    brand: String,
+    Brand: String,
     isPublished:{
         type: Boolean,
         default:false
@@ -12,5 +11,6 @@ const commerceSchema = new mongoose.Schema({
 
 });
 
-const Accessorize = mongoose.model('Accessory', commerceSchema);
-module.exports = Accessorize;
+const Electronics = mongoose.model('electronic', commerceSchema);
+
+module.exports = Electronics;

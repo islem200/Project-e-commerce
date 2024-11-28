@@ -1,58 +1,57 @@
 const commerce = require("../models/commerce");
-const Accessorize = require("../models/commerce");
+const Electronics = require("../models/commerce");
 
-const getAllAccessorize = async (req, res) => {
+const getAllElectronic = async (req, res) => {
   try {
-    const e_commerce = await Accessorize.find();
+    const e_commerce = await Electronics.find();
     res.status(200).send(e_commerce);
   } catch (error) {
     res.status(500).send("Something went wrong", error.message);
   }
 };
 
-const getAccessorizeById = async (req, res) => {
+const getElectronicById = async (req, res) => {
   try {
     const id = req.params.id;
-    const Accessory = await Accessorize.findById(id);
+    const Electronic = await Electronics.findById(id);
 
-    if (!Accessory) {
+    if (!Electronic) {
       return res.status(404).send("WE could not find item...");
     }
 
-    return res.status(200).send(Accessory);
+    return res.status(200).send(Electronic);
   } catch (error) {
     res.send("Something went wrong", error.message);
   }
 };
 
-const createAccessorize = async (req, res)=>{
+const createElectronic = async (req, res)=>{
   try {
-    const accessory = new Accessorize({
-      accessory_type: req.body.accessory_type,
+    const electronic = new Electronics({
+      name: req.body.name,
       price: req.body.price,
-      colors: req.body.colors,
-      brand: req.body.brand
+      brand: req.body.brand,
     })
-    const Acc = await accessory.save()
-    res.status(201).send(Acc)
+    const elec = await electronic.save()
+    res.status(201).send(elec)
     
   } catch (error) {
-    res.status(500).send("We could not create new Accessory");
+    res.status(500).send("We could not create new Electronic");
     
   }
 };
 
- const updateAccessorize = async (req, res)=>{
+ const updateElectronic = async (req, res)=>{
    try {
     const id = req.params.id;
     const updateData = req.body;
-    const Acc = await Accessorize.findByIdAndUpdate(id, updateData, { new: true });
+    const elec = await Electronics.findByIdAndUpdate(id, updateData, { new: true });
     
     
-    if (!Acc) {
-      return res.status(404).send({ message: "Accessory not found" });
+    if (!elec) {
+      return res.status(404).send({ message: "Electronic not found" });
     }
-    res.status(200).send(Acc);
+    res.status(200).send(elec);
     
    } catch (error) {
     
@@ -60,10 +59,10 @@ const createAccessorize = async (req, res)=>{
     
    }
  };
-  const deleteAccessorize = async (req, res)=>{
+  const deleteElectronic = async (req, res)=>{
     try {
      const id = req.params.id;
-     const result = await Accessorize.findByIdAndDelete(id);
+     const result = await Electronics.findByIdAndDelete(id);
      res.status(200).send(result);
 
 
@@ -78,9 +77,9 @@ const createAccessorize = async (req, res)=>{
 
 
 module.exports = {
-  getAllAccessorize,
-  getAccessorizeById,
-  createAccessorize,
-  updateAccessorize,
-   deleteAccessorize,
+  getAllElectronic,
+  getElectronicById,
+  createElectronic,
+  updateElectronic,
+   deleteElectronic,
 };

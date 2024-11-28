@@ -1,20 +1,20 @@
 const express = require("express");
  const router = express.Router();
- const Accessorize = require("../models/commerce"); 
+ const Electronics = require("../models/commerce"); 
 
  const{
-    getAllAccessorize,
-    getAccessorizeById, 
-     createAccessorize,
-     updateAccessorize,
-     deleteAccessorize,
+    getAllElectronic,
+    getElectronicById, 
+     createElectronic,
+     updateElectronic,
+     deleteElectronic,
 
  } = require("../controllers/commerceControllers");
 
- router.get("/", getAllAccessorize,);
-  router.get("/:id", getAccessorizeById);
-  router.post("/", createAccessorize);
-  router.put("/:id", updateAccessorize)
-  router.delete("/:id", deleteAccessorize);
+ router.get("/", getAllElectronic,);
+  router.get("/:id", getElectronicById);
+  router.post("/", createElectronic);
+  router.put("/:id", updateElectronic)
+  router.delete("/:id", deleteElectronic);
 
  module.exports = router;
