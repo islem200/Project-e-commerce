@@ -1,4 +1,4 @@
-const commerce = require("../models/commerce");
+const validateCommerce = require("../utils/validateCommerce")
 const Electronics = require("../models/commerce");
 
 const getAllElectronic = async (req, res) => {
@@ -25,21 +25,42 @@ const getElectronicById = async (req, res) => {
   }
 };
 
-const createElectronic = async (req, res)=>{
+
+const createElectronic = async (req, res) => {
   try {
-    const electronic = new Electronics({
-      name: req.body.name,
-      price: req.body.price,
-      brand: req.body.brand,
-    })
-    const elec = await electronic.save()
-    res.status(201).send(elec)
-    
-  } catch (error) {
-    res.status(500).send("We could not create new Electronic");
-    
+    const { error } = validateCommerce (req.body);
+  if (error) {
+      return res.status(400).send(error.details[0].message);
+
   }
-};
+
+  let electronic= new Electronics({
+      name: req.body.name,
+  });
+
+  product= await electronic.save()
+  res.send(electronic)
+
+}catch (error) {
+    res.status(500).send("We could not create new Electronic");
+  }
+}
+  
+// const createElectronic = async (req, res)=>{
+//   try {
+//     const electronic = new Electronics({
+//       name: req.body.name,
+//       price: req.body.price,
+//       brand: req.body.brand,
+//     })
+//     const elec = await electronic.save()
+//     res.status(201).send(elec)
+    
+//   } catch (error) {
+//     res.status(500).send("We could not create new Electronic");
+    
+//   }
+// };
 
  const updateElectronic = async (req, res)=>{
    try {

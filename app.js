@@ -1,17 +1,29 @@
 require("dotenv").config();
 const express = require("express");
 const connectdb = require("./Db/db");
+const cors = require("cors")
 
 const commerceRoutes = require("./routes/commerceRoutes");
 const Electronics = require("./models/commerce");
 
 const userRoutes = require("./routes/userRoutes");
+// const session = require("express-session");
 
 
 const app = express();
+app.use(cors())
 app.use(express.json());
 
+
 connectdb();
+// app.use(
+//   session({
+//     secret: process.env.SECRET_KEY, //Use a strong secret in production
+//     resave: true,
+//     saveUninitialized: false,
+//     cookie: { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }, // 1-day cookie lifespan
+//   })
+// );
 app.use("/api/electronic", commerceRoutes);
 app.use("/api/user", userRoutes );
 
