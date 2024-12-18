@@ -1,19 +1,16 @@
 require("dotenv").config();
 const express = require("express");
 const connectdb = require("./Db/db");
-const cors = require("cors")
+const cors = require("cors");
 
-const commerceRoutes = require("./routes/commerceRoutes");
-const Electronics = require("./models/commerce");
+const productRoutes = require("./routes/productRoutes");
 
 const userRoutes = require("./routes/userRoutes");
 // const session = require("express-session");
 
-
 const app = express();
-app.use(cors())
+app.use(cors());
 app.use(express.json());
-
 
 connectdb();
 // app.use(
@@ -24,125 +21,428 @@ connectdb();
 //     cookie: { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }, // 1-day cookie lifespan
 //   })
 // );
-app.use("/api/electronic", commerceRoutes);
-app.use("/api/user", userRoutes );
-
+app.use("/api/products", productRoutes);
+app.use("/api/user", userRoutes);
 
 // async function createElectronic() {
 //   try {
 //     await Electronics.create([
 //       {
-//         name:"Phone",
-//         price:639,
-//         Brand:"Sumsung Galaxy A15"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 639,
+//         brand: "Sumsung Galaxy A15",
+//         contInStock: 7,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicphone115.jpg",
 //       },
 //       {
-//         name:"Phone",
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
 //         price: 1159,
-//         Brand:"Sumsung Galaxy A25"
+//         brand: "Sumsung Galaxy A25",
+//         contInStock: 7,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicsum1.jpg",
 //       },
 //       {
-//         name:"Phone",
-//         price:5699,
-//         Brand:"Sumsung Galaxy S24 Ultra"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 1159,
+//         brand: "Sumsung Galaxy A25",
+//         contInStock: 7,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicsum5.jpg",
 //       },
 //       {
-//         name:"Phone",
-//         price:4499 ,
-//         Brand:"Sumsung Galaxy S24 Plus"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 1159,
+//         brand: "Sumsung Galaxy A25",
+//         contInStock: 7,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicsum2.jpg",
 //       },
 //       {
-//         name:"Phone",
-//         price: 7399 ,
-//         Brand:"iPhone 16 Pro"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 5699,
+//         brand: "Sumsung Galaxy S24 Ultra",
+//         contInStock: 8,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicphone114.jpg",
 //       },
 //       {
-//         name:"Phone",
-//         price: 7300 ,
-//         Brand:"iPhone 16"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 4499,
+//         brand: "Sumsung Galaxy S24 Plus",
+//         contInStock: 6,
+//         rating: 4,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicphone114.jpg",
 //       },
 //       {
-//         name:"Phone",
-//         price: 5200 ,
-//         Brand:"iPhone 15"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 4499,
+//         brand: "Sumsung Galaxy S24 Plus",
+//         contInStock: 6,
+//         rating: 4,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicphone115.jpg",
 //       },
 //       {
-//         name:"Phone",
-//         price: 3600 ,
-//         Brand:"iPhone 14"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 7399,
+//         brand: "iPhone 16 Pro",
+//         contInStock: 4,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicphone1.jpg",
+//       },
+
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 7399,
+//         brand: "iPhone 16 Pro",
+//         contInStock: 4,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "phone 15.jpg",
 //       },
 //       {
-//         name:"TV",
-//         price:575,
-//         Brand:"Toshiba"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 7300,
+//         brand: "iPhone 16",
+//         contInStock: 5,
+//         rating: 4,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicphone 4.jpg",
 //       },
 //       {
-//         name:"TV",
-//         price:659,
-//         Brand:"biolux"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 5200,
+//         brand: "iPhone 15",
+//         contInStock: 1,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicphone 15.jpg",
 //       },
 //       {
-//         name:"TV",
-//         price: 679 ,
-//         Brand:"TCL"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 3600,
+//         brand: "iPhone 14",
+//         contInStock: 5,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicphone6.jpg",
 //       },
 //       {
-//         name:"TV",
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 3600,
+//         brand: "iPhone 14",
+//         contInStock: 5,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicphone5.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "Phone",
+//         price: 3600,
+//         brand: "iPhone 14",
+//         contInStock: 5,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicphone14.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "TV",
+//         price: 575,
+//         brand: "Toshiba",
+//         contInStock: 5,
+//         rating: 3,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "public\tv1.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "TV",
+//         price: 659,
+//         brand: "biolux",
+//         contInStock: 4,
+//         rating: 6,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "public\tv2.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "TV",
+//         price: 679,
+//         brand: "TCL",
+//         contInStock: 5,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "public\tv3.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "TV",
 //         price: 799,
-//         Brand:"Sumsung"
+//         brand: "Sumsung",
+//         contInStock: 2,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "public\tv4.jpg",
 //       },
 //       {
-//         name:"Airpods",
-//         price: 399 ,
-//         Brand:"JBL"
+//         user: "675318b91deba0a48b54a266",
+//         name: "TV",
+//         price: 799,
+//         brand: "Sumsung",
+//         contInStock: 2,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "public\tv9.jpg",
 //       },
 //       {
-//         name:"Airpods",
-//         price: 500 ,
-//         Brand:"Apple"
+//         user: "675318b91deba0a48b54a266",
+//         name: "TV",
+//         price: 799,
+//         brand: "Sumsung",
+//         contInStock: 2,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "public\tv10.jpg",
 //       },
 //       {
-//         name:"Airpods",
-//         price: 319 ,
-//         Brand:"JBL"
+//         user: "675318b91deba0a48b54a266",
+//         name: "TV",
+//         price: 799,
+//         brand: "Sumsung",
+//         contInStock: 2,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "public\tv9.jpg",
 //       },
 //       {
-//         name:"Airpods",
-//         price:265 ,
-//         Brand:"Sumsung"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Airpods",
+//         price: 399,
+//         brand: "JBL",
+//         contInStock: 4,
+//         rating: 3,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicaipods11.jpg",
 //       },
 //       {
-//         name:"Smart watch",
-//         price: 2999 ,
-//         Brand:"Apple"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Airpods",
+//         price: 500,
+//         brand: "Apple",
+//         contInStock: 3,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicairpods1.jpg",
 //       },
 //       {
-//         name:"Smart watch",
-//         price:2899 ,
-//         Brand:"Apple"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Airpods",
+//         price: 500,
+//         brand: "Apple",
+//         contInStock: 3,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicairpods2.jpg",
 //       },
 //       {
-//         name:"Smart watch",
-//         price:2965 ,
-//         Brand:"Apple"
+//         user: "675318b91deba0a48b54a266",
+//         name: "Airpods",
+//         price: 500,
+//         brand: "Apple",
+//         contInStock: 3,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicairpods3.jpg",
 //       },
 //       {
-//         name:"Smart watch",
-//         price:2555 ,
-//         Brand:"Apple"
-//       }
-//     ])
-//     console.log("success")
-    
+//         user: "675318b91deba0a48b54a266",
+//         name: "Airpods",
+//         price: 500,
+//         brand: "Apple",
+//         contInStock: 3,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicairpods1.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "Airpods",
+//         price: 319,
+//         brand: "JBL",
+//         contInStock: 7,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicaipods12.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "Airpods",
+//         price: 265,
+//         brand: "Sumsung",
+//         contInStock: 6,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicairpods8.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "Airpods",
+//         price: 265,
+//         brand: "Sumsung",
+//         contInStock: 6,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicairpods9.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "Smart watch",
+//         price: 2999,
+//         brand: "Apple",
+//         contInStock: 5,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicsmart watch.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "Smart watch",
+//         price: 2899,
+//         brand: "Apple",
+//         contInStock: 4,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicsmartwatch4.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "Smart watch",
+//         price: 2965,
+//         brand: "Apple",
+//         contInStock: 3,
+//         rating: 2,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicsmartwatch5.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "Smart watch",
+//         price: 2555,
+//         brand: "Apple",
+//         contInStock: 2,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicsmartwatch3.jpg",
+//       },
+//       {
+//         user: "675318b91deba0a48b54a266",
+//         name: "Smart watch",
+//         price: 2555,
+//         brand: "Apple",
+//         contInStock: 2,
+//         rating: 1,
+//         numReviews: 100,
+//         description: "technology",
+//         category: "Electronic",
+//         image: "publicsmartwatch6.jpg",
+//       },
+//     ]);
+//     console.log("success");
 //   } catch (error) {
-//     console.error(error.message)
+//     console.error(error.message);
 //   }
-  
 // }
-// createElectronic()
-
-
-
+//createElectronic();
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
